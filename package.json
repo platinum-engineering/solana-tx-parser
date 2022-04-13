@@ -1,0 +1,13 @@
+{
+  "name": "solana-tx-parser",
+  "version": "0.0.1",
+  "main": "index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@project-serum/anchor": "^0.23",
+    "@project-serum/common": "^0.0.1-beta.3"
+  },
+  "devDependencies": {
+    "typescript": "^4.3.5"
+  }
+}
