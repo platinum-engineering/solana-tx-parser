@@ -1,17 +1,7 @@
 import bs58 from "bs58";
-import { sha256 } from "js-sha256";
-import { snakeCase } from "snake-case";
 
 import * as anchor from '@project-serum/anchor';
 import { BorshInstructionCoder } from '@project-serum/anchor/dist/cjs/coder/borsh/instruction';
-
-// Not technically sighash, since we don't include the arguments, as Rust
-// doesn't allow function overloading.
-function sighash(nameSpace: string, ixName: string): Buffer {
-    let name = snakeCase(ixName);
-    let preimage = `${nameSpace}:${name}`;
-    return Buffer.from(sha256.digest(preimage)).slice(0, 8);
-}
 
 export type AccountDescription = {
     publicKey: anchor.web3.PublicKey,
