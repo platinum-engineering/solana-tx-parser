@@ -2,6 +2,10 @@
     "include": [
         "./src/**/*"
     ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ],
     "compilerOptions": {
         "sourceMap": true,
         "declaration": true,
@@ -17,9 +21,9 @@
             "node_modules/@types"
         ],
         "moduleResolution": "node",
-        "module": "es2022",
+        "module": "commonjs",
         "target": "es2019",
         "outDir": "dist/",
-        "rootDir": "./src",
+        "rootDir": "./src"
     }
 }
