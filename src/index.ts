@@ -21,7 +21,7 @@ export type AccountDescription = {
 };
 
 export type InstructionDescription = {
-    accounts: any[],
+    accounts: AccountDescription[],
     data: object,
     name: string
 };
@@ -29,7 +29,7 @@ export type InstructionDescription = {
 export async function fetchTransaction(
     conn: anchor.web3.Connection,
     txId: string
-): Promise<anchor.web3.ParsedTransactionWithMeta> {
+): Promise<anchor.web3.ParsedTransactionWithMeta | null> {
     await conn.confirmTransaction(txId);
     const txInfo = await conn.getParsedTransaction(txId, 'confirmed');
     return txInfo;
@@ -59,10 +59,10 @@ export async function parseTransaction(
     txInfo: anchor.web3.ParsedTransactionWithMeta,
     programs: anchor.Program<any>[]
 ): Promise<InstructionDescription[]> {
-    const descriptions = [];
+    const descriptions: InstructionDescription[] = [];
 
     for (const ix of txInfo.transaction.message.instructions) {
-        if (ix.parsed) {
+        if (ix.hasOwnProperty('parsed')) {
             const ixParsed = (ix as anchor.web3.ParsedInstruction).parsed;
             switch (ixParsed.type) {
                 case 'createAccount': {
